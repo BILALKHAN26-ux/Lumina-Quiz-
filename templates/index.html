@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina - AI Study Assessment</title>
+    
+    <!-- Stylish Futuristic Font: Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- 3D Interactive Canvas Background -->
+    <canvas id="bg3d"></canvas>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+    <h1 class="brand-title">LUMINA</h1>
+    <p>Transform study documents into interactive quizzes with instant source verification.</p>
+    </header>
+
+        <!-- Upload Card -->
+        <section class="upload-card">
+            <div class="drop-zone" id="dropZone">
+                <input type="file" id="pdfInput" accept=".pdf,.txt" hidden>
+                <div class="drop-content" id="dropContent">
+                    <p id="fileNameDisplay"><strong>Click to select a file</strong> or drag & drop here</p>
+                    <span>Supports .pdf and .txt files</span>
+                </div>
+            </div>
+            <button id="uploadBtn" class="btn-primary" disabled>Generate Quiz</button>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="statusMessage" class="status-box" style="display: none;">
+            <div class="spinner"></div>
+            <p id="statusText">Reading document & synthesizing quiz...</p>
+        </div>
+
+        <!-- Quiz Container -->
+        <main id="quizContainer" class="quiz-container"></main>
+
+        <!-- Score Summary -->
+       <!-- Enhanced Result & Performance Dashboard -->
+<section id="summaryContainer" class="summary-card" style="display: none;">
+    <div class="summary-header">
+        <span id="scoreBadge" class="score-badge">Mastery Achieved</span>
+        <h2>Assessment Completed</h2>
+        <p class="summary-subtitle">Here is a detailed breakdown of your retention performance.</p>
+    </div>
+
+    <!-- Radial Progress Indicator -->
+    <div class="circle-progress-wrapper">
+        <svg class="progress-ring" width="160" height="160">
+            <circle class="progress-ring-bg" stroke="rgba(255, 255, 255, 0.15)" stroke-width="12" fill="transparent" r="66" cx="80" cy="80"/>
+            <circle id="progressRingFill" class="progress-ring-fill" stroke="url(#ringGradient)" stroke-width="12" stroke-dasharray="414.69" stroke-dashoffset="414.69" stroke-linecap="round" fill="transparent" r="66" cx="80" cy="80"/>
+            <defs>
+                <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" />
+                    <stop offset="50%" stop-color="#818cf8" />
+                    <stop offset="100%" stop-color="#c084fc" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <div class="circle-inner-data">
+            <span id="scorePercentage" class="percentage-val">0%</span>
+            <span class="percentage-lbl">Accuracy</span>
+        </div>
+    </div>
+
+    <!-- Quick Stat Matrix -->
+    <div class="stats-grid">
+        <div class="stat-pill">
+            <span class="stat-num" id="statCorrect">0</span>
+            <span class="stat-label">Correct</span>
+        </div>
+        <div class="stat-pill">
+            <span class="stat-num" id="statIncorrect">0</span>
+            <span class="stat-label">Incorrect</span>
+        </div>
+        <div class="stat-pill">
+            <span class="stat-num" id="statTotal">0</span>
+            <span class="stat-label">Questions</span>
+        </div>
+    </div>
+
+    <!-- Dual Actions -->
+    <div class="summary-actions">
+        <button id="retryBtn" class="btn-primary">Generate Fresh Quiz</button>
+        <button class="btn-secondary" onclick="location.reload()">Upload New Document</button>
+    </div>
+</section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
